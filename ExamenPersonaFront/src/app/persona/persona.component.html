@@ -1,0 +1,100 @@
+<div class="main-panel">
+    <div class="main-content">
+        <h2 class="primary text-uppercase">Personas</h2>
+        <div class="row">
+            <div class="col-4">
+            </div>
+            <div class="col-4">
+                <button type="button" class="btn btn-outline-primary btn-sm" (click)="AbreModal(2,Detalle,null)">Agrega Persona</button>
+            </div>
+            <div class="col-4">
+            </div>
+        </div>
+        <div class="card">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Nombre</th>
+                          <th scope="col">Edad</th>
+                          <th scope="col">Email</th>
+                          <th scope="col">Modifica</th>
+                          <th scope="col">Elimina</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let p of Personas">
+                            <th>
+                                {{p.id}}
+                            </th>
+                            <th>
+                                {{p.nombre}}
+                            </th>
+                            <th>
+                                {{p.edad}}
+                            </th>
+                            <th>
+                                {{p.email}}
+                            </th>
+                            <th>
+                                <button type="button" class="btn btn-warning" (click)="AbreModal(1,Detalle,p)">Modifica</button>
+                            </th>
+                            <th>
+                                <button type="button" class="btn btn-danger" (click)="EliminaPersona(p.id)">Elimina</button>
+                            </th>
+                        </tr>
+                      </tbody>
+                </table>
+            </div>
+        </div>        
+</div>
+
+
+<!-- seccion de modal-->
+<ng-template  #Detalle let-modal>
+    <div class="card">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">{{titulomodal}}</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="nombreInput">Nombre:</label>
+                <input type="text" 
+                id="nombreInput" 
+                [(ngModel)]="MNombre"
+                class="form-control" 
+                placeholder="Introduce Nombre">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="nombreInput">Edad:</label>
+                <input type="number" 
+                id="nombreInput" 
+                class="form-control" 
+                [(ngModel)]="MEdad"
+                placeholder="Introduce Edad">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="nombreInput">Email:</label>
+                <input type="text" 
+                id="nombreInput" 
+                class="form-control" 
+                [(ngModel)]="MCorreo"
+                placeholder="Introduce Email">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button  *ngIf="this.Mopt!=1" type="button" class="btn btn-lg btn-primary" (click)="AgregaPersona()">{{titulomodal}}</button>
+                <button  *ngIf="this.Mopt==1" type="button" class="btn btn-lg btn-primary" (click)="ModificaPersona()">{{titulomodal}}</button>
+            </div>
+        </div>
+    </div>
+</ng-template>
